@@ -19,4 +19,14 @@ class ListUtilTest extends FlatSpec with Matchers {
       val itemList =  ListUtil.lastNth(list, 1)
       itemList.length shouldEqual 0
     }
+
+    "lastNth" should "throw an exception when items in the list is lesser than n" in {
+      val list = List[Int]()
+
+      val expectedException = intercept[RuntimeException] {
+        ListUtil.lastNth(list, 1)
+      }
+
+      expectedException.getMessage shouldBe "Not enough item on the list"
+    }
 }
