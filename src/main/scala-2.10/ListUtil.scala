@@ -1,10 +1,10 @@
 object ListUtil {
-  def lastOne(list: List[Int]): Int = {
+  def lastNth(list: List[Int], n: Int): List[Int] = {
     if (list.isEmpty)
-       throw new RuntimeException("Empty list")
-    else if(list.length == 1)
-        list.head
+       List[Int]()
+    else if(list.length == n)
+       List[Int](list.head) ++ lastNth(list.tail, n-1)
     else
-        lastOne(list.tail)
+       lastNth(list.tail, n)
   }
 }
