@@ -22,4 +22,14 @@ object ListUtil {
     else
       findNth(list.tail, n - 1)
   }
+
+  def count(list: List[Int]): Int = {
+    def counter(list: List[Int], n: Int) : Int = {
+      if (list.isEmpty)
+        n
+      else
+        counter(list.tail, n + 1)
+    }
+    counter(list, 0)
+  }
 }

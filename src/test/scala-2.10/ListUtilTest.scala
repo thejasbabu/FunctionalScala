@@ -59,4 +59,16 @@ class ListUtilTest extends FlatSpec with Matchers {
     }
     expectedException.getMessage shouldBe "No item on the list"
   }
+
+  "count" should "return number of items in list" in {
+    val list = List[Int](1, 2, 3, 5, 10)
+    val count = ListUtil.count(list)
+    count shouldBe 5
+  }
+
+  "count" should "return 0 when empty list is passed" in {
+    val list = List[Int]()
+    val count = ListUtil.count(list)
+    count shouldBe 0
+  }
 }
