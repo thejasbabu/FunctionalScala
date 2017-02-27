@@ -1,17 +1,17 @@
 object ListUtil {
   def lastNth(list: List[Int], n: Int): List[Int] = {
-    if (list.length < n)
+    if (count(list) < n)
       throw new RuntimeException("Not enough item on the list")
     else if (list.isEmpty)
       List[Int]()
-    else if (list.length == n)
+    else if (count(list) == n)
       List[Int](list.head) ++ lastNth(list.tail, n - 1)
     else
       lastNth(list.tail, n)
   }
 
   def findNth(list: List[Int], n: Int): Int = {
-    if (list.length < n)
+    if (count(list) < n)
       throw new RuntimeException("Not enough item on the list")
     else if (list.isEmpty)
       throw new RuntimeException("No item on the list")
