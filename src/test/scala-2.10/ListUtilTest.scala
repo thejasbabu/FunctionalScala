@@ -93,4 +93,16 @@ class ListUtilTest extends FlatSpec with Matchers {
     val list = List[Int](1, 2)
     ListUtil.isPalindrome(list) shouldBe false
   }
+
+  "compress" should "remove duplicate and return list" in {
+    val list = List[Int](1, 2, 2, 3, 3, 4, 3)
+    val compressedList = ListUtil.compress(list)
+    compressedList shouldBe List[Int](1, 2, 3, 4, 3)
+  }
+
+  "compress" should "return empty list" in {
+    val list = List[Int]()
+    val compressedList = ListUtil.compress(list)
+    compressedList.length shouldBe 0
+  }
 }

@@ -30,7 +30,7 @@ object ListUtil {
       count(list.tail) + 1
   }
 
-  def reverse(list: List[Any]) : List[Any] = {
+  def reverse(list: List[Any]): List[Any] = {
     if (list.isEmpty)
       List()
     else if (count(list) == 1)
@@ -44,13 +44,30 @@ object ListUtil {
    */
 
   def isPalindrome(list: List[Any]): Boolean = {
-    def palindrome(list: List[Any], n: Int) :Boolean = {
+    def palindrome(list: List[Any], n: Int): Boolean = {
       if (count(list) == n)
         true
       else
         findNth(list, n) == findNth(list, count(list) - n + 1) &&
-        palindrome(list, n +1)
+          palindrome(list, n + 1)
     }
     palindrome(list, 1)
+  }
+
+  def compress(list: List[Any]): List[Any] = {
+    def compressor(list: List[Any], leftList: List[Any]): List[Any] = {
+      if (list.isEmpty)
+        leftList
+      else if (leftList.isEmpty)
+        list
+      else if (findNth(list, count(list)) == leftList.head)
+        compressor(list, leftList.tail)
+      else
+        compressor(list :+ leftList.head, leftList.tail)
+    }
+    if (list.isEmpty)
+      List()
+    else
+      compressor(List(list.head), list.tail)
   }
 }
