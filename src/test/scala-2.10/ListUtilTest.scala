@@ -8,9 +8,9 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "lastNth" should "return last two item in the list when n = 2" in {
-    val list = List[Int](1, 2, 3, 5, 10)
+    val list = List[String]("1", "2", "3", "5", "10")
     val itemList = ListUtil.lastNth(list, 2)
-    itemList shouldEqual List[Int](5, 10)
+    itemList shouldEqual List[String]("5", "10")
   }
 
   "lastNth" should "return an empty List if list is empty" in {
@@ -61,9 +61,9 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "count" should "return number of items in list" in {
-    val list = List[Int](1, 2, 3, 5, 10)
+    val list = List[String]("1", "2")
     val count = ListUtil.count(list)
-    count shouldBe 5
+    count shouldBe 2
   }
 
   "count" should "return 0 when empty list is passed" in {
