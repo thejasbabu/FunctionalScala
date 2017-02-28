@@ -83,4 +83,14 @@ class ListUtilTest extends FlatSpec with Matchers {
     val reversedList = ListUtil.reverse(list)
     reversedList.length shouldBe 0
   }
+
+  "isPalindrome" should "return true when list is palindrome" in {
+    val list = List[Int](1, 2, 3, 3, 2, 1)
+    ListUtil.isPalindrome(list) shouldBe true
+  }
+
+  "isPalindrome" should "return false when list is not palindrome" in {
+    val list = List[Int](1, 2)
+    ListUtil.isPalindrome(list) shouldBe false
+  }
 }

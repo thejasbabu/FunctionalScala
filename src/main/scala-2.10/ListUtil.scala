@@ -38,4 +38,19 @@ object ListUtil {
     else
       reverse(list.tail) :+ list.head
   }
+
+  /*
+      Or simply list == reverse(list) would also work for isPalindrome
+   */
+
+  def isPalindrome(list: List[Any]): Boolean = {
+    def palindrome(list: List[Any], n: Int) :Boolean = {
+      if (count(list) == n)
+        true
+      else
+        findNth(list, n) == findNth(list, count(list) - n + 1) &&
+        palindrome(list, n +1)
+    }
+    palindrome(list, 1)
+  }
 }
