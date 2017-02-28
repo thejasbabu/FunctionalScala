@@ -31,7 +31,9 @@ object ListUtil {
   }
 
   def reverse(list: List[Any]) : List[Any] = {
-    if (count(list) == 1)
+    if (list.isEmpty)
+      List()
+    else if (count(list) == 1)
       List(list.head)
     else
       reverse(list.tail) :+ list.head

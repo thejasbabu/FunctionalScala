@@ -77,4 +77,10 @@ class ListUtilTest extends FlatSpec with Matchers {
     val reversedList = ListUtil.reverse(list)
     reversedList shouldBe List[Int](3, 2, 1)
   }
+
+  "reverse" should "return empty list when input list is empty" in {
+    val list = List[String]()
+    val reversedList = ListUtil.reverse(list)
+    reversedList.length shouldBe 0
+  }
 }
