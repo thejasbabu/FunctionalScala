@@ -71,4 +71,10 @@ class ListUtilTest extends FlatSpec with Matchers {
     val count = ListUtil.count(list)
     count shouldBe 0
   }
+
+  "reverse" should "reverse the elements in the list" in {
+    val list = List[Int](1, 2, 3)
+    val reversedList = ListUtil.reverse(list)
+    reversedList shouldBe List[Int](3, 2, 1)
+  }
 }

@@ -29,4 +29,11 @@ object ListUtil {
     else
       count(list.tail) + 1
   }
+
+  def reverse(list: List[Any]) : List[Any] = {
+    if (count(list) == 1)
+      List(list.head)
+    else
+      reverse(list.tail) :+ list.head
+  }
 }
