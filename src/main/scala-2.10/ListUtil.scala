@@ -41,7 +41,7 @@ object ListUtil {
 
   /*
       Or simply list == reverse(list) would also work for isPalindrome
-   */
+  */
 
   def isPalindrome(list: List[Any]): Boolean = {
     def palindrome(list: List[Any], n: Int): Boolean = {
@@ -69,5 +69,20 @@ object ListUtil {
       List()
     else
       compressor(List(list.head), list.tail)
+  }
+
+  def dropNth(list: List[Any], n: Int): List[Any] = {
+    def drop(list: List[Any], leftList: List[Any], i: Int): List[Any] = {
+      if (i == n) {
+        list ++ leftList.tail
+      } else {
+        drop(list :+ leftList.head, leftList.tail, i + 1)
+      }
+    }
+    if (count(list) < n || n < 1) {
+      throw new RuntimeException(s"Invalid value of n :" + n)
+    } else {
+      drop(List(), list, 1)
+    }
   }
 }

@@ -105,4 +105,26 @@ class ListUtilTest extends FlatSpec with Matchers {
     val compressedList = ListUtil.compress(list)
     compressedList.length shouldBe 0
   }
+
+  "dropNth" should "remove the Nth element from the list" in {
+    val list = List[Int](1, 2, 3, 4, 5)
+    val modifiedList = ListUtil.dropNth(list, 1)
+    modifiedList shouldBe List[Int](2, 3, 4, 5)
+  }
+
+  "dropNth" should "throw exception when n is greater than the number of elements in list" in {
+    val list = List[Int](1, 2, 3, 4, 5)
+    val expectedException = intercept[RuntimeException] {
+      ListUtil.dropNth(list, 6)
+    }
+    expectedException.getMessage shouldEqual "Invalid value of n :6"
+  }
+
+  "dropNth" should "throw exception when n is lesser than 1" in {
+    val list = List[Int](1, 2, 3, 4, 5)
+    val expectedException = intercept[RuntimeException] {
+      ListUtil.dropNth(list, 0)
+    }
+    expectedException.getMessage shouldEqual "Invalid value of n :0"
+  }
 }
