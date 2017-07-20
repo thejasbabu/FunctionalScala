@@ -24,10 +24,16 @@ object ListUtil {
   }
 
   def count(list: List[Any]): Int = {
+    def counter(list: List[Any], i: Int): Int = {
+      if (list.isEmpty)
+        i
+      else
+        counter(list.tail, i + 1)
+    }
     if (list.isEmpty)
       0
     else
-      count(list.tail) + 1
+      counter(list.tail, 1)
   }
 
   def reverse(list: List[Any]): List[Any] = {
@@ -72,17 +78,36 @@ object ListUtil {
   }
 
   def dropNth(list: List[Any], n: Int): List[Any] = {
-    def drop(list: List[Any], leftList: List[Any], i: Int): List[Any] = {
-      if (i == n) {
-        list ++ leftList.tail
+    if (count(list) < n || n < 1) {
+      throw new RuntimeException(s"Invalid value of n")
+    } else {
+      val (firstList, secondList) = split(list, n - 1)
+      firstList ++ secondList.tail
+    }
+  }
+
+  def split(list: List[Any], n: Int): (List[Any], List[Any]) = {
+    def splitAtNth(list: List[Any], leftList: List[Any]): (List[Any], List[Any]) = {
+      if (count(list) == n || n < 1) {
+        (list, leftList)
       } else {
-        drop(list :+ leftList.head, leftList.tail, i + 1)
+        splitAtNth(list :+ leftList.head, leftList.tail)
       }
     }
-    if (count(list) < n || n < 1) {
-      throw new RuntimeException(s"Invalid value of n :" + n)
+    if (count(list) < n) {
+      throw new RuntimeException(s"Invalid value of n")
     } else {
-      drop(List(), list, 1)
+      splitAtNth(List(), list)
+    }
+  }
+
+  def slice(list: List[Any], i: Int, j: Int): List[Any] = {
+    if (count(list) < j || i < 1) {
+      throw new RuntimeException(s"Invalid value of n")
+    } else {
+      val (firstList, _) = split(list, j)
+      val (_, resultList) = split(firstList, i - 1)
+      resultList
     }
   }
 }

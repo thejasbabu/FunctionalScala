@@ -108,8 +108,8 @@ class ListUtilTest extends FlatSpec with Matchers {
 
   "dropNth" should "remove the Nth element from the list" in {
     val list = List[Int](1, 2, 3, 4, 5)
-    val modifiedList = ListUtil.dropNth(list, 1)
-    modifiedList shouldBe List[Int](2, 3, 4, 5)
+    val modifiedList = ListUtil.dropNth(list, 2)
+    modifiedList shouldBe List[Int](1, 3, 4, 5)
   }
 
   "dropNth" should "throw exception when n is greater than the number of elements in list" in {
@@ -117,7 +117,7 @@ class ListUtilTest extends FlatSpec with Matchers {
     val expectedException = intercept[RuntimeException] {
       ListUtil.dropNth(list, 6)
     }
-    expectedException.getMessage shouldEqual "Invalid value of n :6"
+    expectedException.getMessage shouldEqual "Invalid value of n"
   }
 
   "dropNth" should "throw exception when n is lesser than 1" in {
@@ -125,6 +125,19 @@ class ListUtilTest extends FlatSpec with Matchers {
     val expectedException = intercept[RuntimeException] {
       ListUtil.dropNth(list, 0)
     }
-    expectedException.getMessage shouldEqual "Invalid value of n :0"
+    expectedException.getMessage shouldEqual "Invalid value of n"
+  }
+
+  "split" should "split the list into two at the position mentioned by n" in {
+    val list = List[Int](1, 2, 3, 4, 5, 6)
+    val (firstList, secondList) = ListUtil.split(list, 3)
+    firstList shouldEqual List[Int](1, 2, 3)
+    secondList shouldEqual List[Int](4, 5, 6)
+  }
+
+  "slice" should "slice the list between the two given position" in {
+    val list = List[Int](1, 2, 3, 4, 5, 6)
+    val result = ListUtil.slice(list, 1, 5)
+    result shouldEqual List[Any](1, 2, 3, 4, 5)
   }
 }
