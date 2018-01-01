@@ -10,15 +10,12 @@ object ListUtil {
       lastNth(list.tail, n)
   }
 
-  def findNth(list: List[Any], n: Int): Any = {
-    if (count(list) < n)
-      throw new RuntimeException("Not enough item on the list")
-    else if (list.isEmpty)
-      throw new RuntimeException("No item on the list")
-    else if (n <= 0)
-      throw new RuntimeException(s"Invalid value for n: " + n)
+
+  def findNth(list: List[Any], n: Int): Option[Any] = {
+    if (count(list) < n || n <= 0 || list.isEmpty)
+      None
     else if (n == 1)
-      list.head
+      Some(list.head)
     else
       findNth(list.tail, n - 1)
   }
@@ -64,7 +61,7 @@ object ListUtil {
         leftList
       else if (leftList.isEmpty)
         list
-      else if (findNth(list, count(list)) == leftList.head)
+      else if (findNth(list, count(list)) == leftList.headOption)
         compressor(list, leftList.tail)
       else
         compressor(list :+ leftList.head, leftList.tail)

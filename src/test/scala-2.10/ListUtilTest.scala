@@ -32,32 +32,22 @@ class ListUtilTest extends FlatSpec with Matchers {
 
   "findNth" should "return the Nth element in the list" in {
     val list = List[Int](1, 2, 3, 5, 10)
-    val item = ListUtil.findNth(list, 2)
-    item shouldEqual 2
+    ListUtil.findNth(list, 4) shouldEqual Some(5)
   }
 
-  "findNth" should "throw an exception when invalid value is supplied as N" in {
+  "findNth" should "return None when invalid value is supplied as N" in {
     val list = List[Int](1, 2)
-    val expectedException = intercept[RuntimeException] {
-      ListUtil.findNth(list, 0)
-    }
-    expectedException.getMessage shouldBe "Invalid value for n: 0"
+    ListUtil.findNth(list, 0) shouldEqual None
   }
 
-  "findNth" should "throw an exception when list has less elements than the value of N" in {
+  "findNth" should "return None when list has less elements than the value of N" in {
     val list = List[Int](1, 2)
-    val expectedException = intercept[RuntimeException] {
-      ListUtil.findNth(list, 3)
-    }
-    expectedException.getMessage shouldBe "Not enough item on the list"
+    ListUtil.findNth(list, 3) shouldEqual None
   }
 
-  "findNth" should "throw an exception when provided with empty list" in {
+  "findNth" should "return None when provided with empty list" in {
     val list = List[Int]()
-    val expectedException = intercept[RuntimeException] {
-      ListUtil.findNth(list, 0)
-    }
-    expectedException.getMessage shouldBe "No item on the list"
+    ListUtil.findNth(list, 0) shouldEqual None
   }
 
   "count" should "return number of items in list" in {
