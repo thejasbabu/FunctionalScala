@@ -25,15 +25,12 @@ object ListUtil {
 
   def count(list: List[Any]): Int = {
     def counter(list: List[Any], i: Int): Int = {
-      if (list.isEmpty)
-        i
-      else
-        counter(list.tail, i + 1)
+      list match {
+        case Nil => i
+        case _ :: tail => counter(tail, i + 1)
+      }
     }
-    if (list.isEmpty)
-      0
-    else
-      counter(list.tail, 1)
+    counter(list, 0)
   }
 
   def reverse(list: List[Any]): List[Any] = {

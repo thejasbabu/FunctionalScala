@@ -61,9 +61,9 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "count" should "return number of items in list" in {
-    val list = List[String]("1", "2")
+    val list = List[String]("1", "2", "3", "4")
     val count = ListUtil.count(list)
-    count shouldBe 2
+    count shouldBe 4
   }
 
   "count" should "return 0 when empty list is passed" in {
