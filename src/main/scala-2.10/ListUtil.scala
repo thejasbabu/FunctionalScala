@@ -34,12 +34,13 @@ object ListUtil {
   }
 
   def reverse(list: List[Any]): List[Any] = {
-    if (list.isEmpty)
-      List()
-    else if (count(list) == 1)
-      List(list.head)
-    else
-      reverse(list.tail) :+ list.head
+    def reverseList(original: List[Any], reversed: List[Any]): List[Any] =
+      original match {
+        case Nil => reversed
+        case x :: Nil => x :: reversed
+        case x :: tail => reverseList(tail, x :: reversed)
+      }
+    reverseList(list, List.empty)
   }
 
   /*
