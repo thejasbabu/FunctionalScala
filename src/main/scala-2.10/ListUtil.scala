@@ -10,7 +10,6 @@ object ListUtil {
       lastNth(list.tail, n)
   }
 
-
   def findNth(list: List[Any], n: Int): Option[Any] = {
     if (count(list) < n || n <= 0 || list.isEmpty)
       None
@@ -19,6 +18,10 @@ object ListUtil {
     else
       findNth(list.tail, n - 1)
   }
+
+  val first = (list: List[Any]) => findNth(list, 1)
+
+  val last = (list: List[Any]) => findNth(list, count(list))
 
   def count(list: List[Any]): Int = {
     def counter(list: List[Any], i: Int): Int = {

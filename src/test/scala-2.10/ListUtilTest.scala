@@ -14,17 +14,13 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "lastNth" should "return an empty List if list is empty" in {
-    val list = List[Int]()
-
-    val itemList = ListUtil.lastNth(list, 0)
+    val itemList = ListUtil.lastNth(List[Int](), 0)
     itemList.length shouldEqual 0
   }
 
   "lastNth" should "throw an exception when items in the list is lesser than n" in {
-    val list = List[Int]()
-
     val expectedException = intercept[RuntimeException] {
-      ListUtil.lastNth(list, 1)
+      ListUtil.lastNth(List[Int](), 1)
     }
 
     expectedException.getMessage shouldBe "Not enough item on the list"
@@ -46,8 +42,25 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "findNth" should "return None when provided with empty list" in {
-    val list = List[Int]()
-    ListUtil.findNth(list, 0) shouldEqual None
+    ListUtil.findNth(List[Int](), 0) shouldEqual None
+  }
+
+  "first" should "return first element of the list" in {
+    val list = List[String]("10", "20")
+    ListUtil.first(list) shouldEqual Some("10")
+  }
+
+  "first" should "return None for empty list" in {
+    ListUtil.first(List()) shouldEqual None
+  }
+
+  "last" should "return the last element of the list" in {
+    val list = List[Int](1, 2, 10, 5)
+    ListUtil.last(list) shouldEqual Some(5)
+  }
+
+  "last" should "return None for empty list" in {
+    ListUtil.last(List()) shouldEqual None
   }
 
   "count" should "return number of items in list" in {
@@ -57,8 +70,7 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "count" should "return 0 when empty list is passed" in {
-    val list = List[Int]()
-    val count = ListUtil.count(list)
+    val count = ListUtil.count(List[Int]())
     count shouldBe 0
   }
 
@@ -69,8 +81,7 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "reverse" should "return empty list when input list is empty" in {
-    val list = List[String]()
-    val reversedList = ListUtil.reverse(list)
+    val reversedList = ListUtil.reverse(List[String]())
     reversedList.length shouldBe 0
   }
 
@@ -91,8 +102,7 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "compress" should "return empty list" in {
-    val list = List[Int]()
-    val compressedList = ListUtil.compress(list)
+    val compressedList = ListUtil.compress(List[Int]())
     compressedList.length shouldBe 0
   }
 
