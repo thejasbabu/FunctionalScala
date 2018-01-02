@@ -1,8 +1,14 @@
 object ListUtil {
+  val first = (list: List[Any]) => findNth(list, 1)
+
+  val last = (list: List[Any]) => findNth(list, count(list))
+
+  val isEmpty = (list: List[Any]) => if( count(list) == 0 ) true else false
+
   def lastNth(list: List[Any], n: Int): List[Any] = {
     if (count(list) < n)
       throw new RuntimeException("Not enough item on the list")
-    else if (list.isEmpty)
+    else if (isEmpty(list))
       List[Any]()
     else if (count(list) == n)
       List[Any](list.head) ++ lastNth(list.tail, n - 1)
@@ -11,17 +17,13 @@ object ListUtil {
   }
 
   def findNth(list: List[Any], n: Int): Option[Any] = {
-    if (count(list) < n || n <= 0 || list.isEmpty)
+    if (count(list) < n || n <= 0 || isEmpty(list))
       None
     else if (n == 1)
       Some(list.head)
     else
       findNth(list.tail, n - 1)
   }
-
-  val first = (list: List[Any]) => findNth(list, 1)
-
-  val last = (list: List[Any]) => findNth(list, count(list))
 
   def count(list: List[Any]): Int = {
     def counter(list: List[Any], i: Int): Int = {
@@ -59,20 +61,15 @@ object ListUtil {
   }
 
   def compress(list: List[Any]): List[Any] = {
-    def compressor(list: List[Any], leftList: List[Any]): List[Any] = {
-      if (list.isEmpty)
-        leftList
-      else if (leftList.isEmpty)
-        list
-      else if (findNth(list, count(list)) == leftList.headOption)
-        compressor(list, leftList.tail)
+    def compressor(compressed: List[Any], original: List[Any]): List[Any] = {
+      if (isEmpty(original))
+        compressed
+      else if (last(compressed) == first(original))
+        compressor(compressed, original.tail)
       else
-        compressor(list :+ leftList.head, leftList.tail)
+        compressor(compressed :+ original.head, original.tail)
     }
-    if (list.isEmpty)
-      List()
-    else
-      compressor(List(list.head), list.tail)
+    compressor(List(), list)
   }
 
   def dropNth(list: List[Any], n: Int): List[Any] = {

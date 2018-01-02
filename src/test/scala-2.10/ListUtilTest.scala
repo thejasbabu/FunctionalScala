@@ -63,6 +63,11 @@ class ListUtilTest extends FlatSpec with Matchers {
     ListUtil.last(List()) shouldEqual None
   }
 
+  "isEmpty" should "returns true if empty or false if not empty" in {
+    ListUtil.isEmpty(List()) shouldEqual true
+    ListUtil.isEmpty(List(1,2,3)) shouldEqual false
+  }
+
   "count" should "return number of items in list" in {
     val list = List[String]("1", "2", "3", "4")
     val count = ListUtil.count(list)
