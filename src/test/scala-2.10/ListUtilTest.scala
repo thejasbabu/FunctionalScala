@@ -1,48 +1,48 @@
 import org.scalatest.{FlatSpec, Matchers}
 
 class ListUtilTest extends FlatSpec with Matchers {
-  "lastNth" should "return last item in the list when n = 1" in {
+  "last" should "return last item in the list when n = 1" in {
     val list = List[Int](1, 2, 3, 5, 10)
-    val itemList = ListUtil.lastNth(list, 1)
+    val itemList = ListUtil.last(list, 1)
     itemList shouldEqual List[Int](10)
   }
 
-  "lastNth" should "return last two item in the list when n = 2" in {
+  "last" should "return last two item in the list when n = 2" in {
     val list = List[String]("1", "2", "3", "5", "10")
-    val itemList = ListUtil.lastNth(list, 2)
+    val itemList = ListUtil.last(list, 2)
     itemList shouldEqual List[String]("5", "10")
   }
 
-  "lastNth" should "return an empty List if list is empty" in {
-    val itemList = ListUtil.lastNth(List[Int](), 0)
+  "last" should "return an empty List if list is empty" in {
+    val itemList = ListUtil.last(List[Int](), 0)
     itemList.length shouldEqual 0
   }
 
-  "lastNth" should "throw an exception when items in the list is lesser than n" in {
+  "last" should "throw an exception when items in the list is lesser than n" in {
     val expectedException = intercept[RuntimeException] {
-      ListUtil.lastNth(List[Int](), 1)
+      ListUtil.last(List[Int](), 1)
     }
 
     expectedException.getMessage shouldBe "Not enough item on the list"
   }
 
-  "findNth" should "return the Nth element in the list" in {
+  "find" should "return the Nth element in the list" in {
     val list = List[Int](1, 2, 3, 5, 10)
-    ListUtil.findNth(list, 4) shouldEqual Some(5)
+    ListUtil.find(list, 4) shouldEqual Some(5)
   }
 
-  "findNth" should "return None when invalid value is supplied as N" in {
+  "find" should "return None when invalid value is supplied as N" in {
     val list = List[Int](1, 2)
-    ListUtil.findNth(list, 0) shouldEqual None
+    ListUtil.find(list, 0) shouldEqual None
   }
 
-  "findNth" should "return None when list has less elements than the value of N" in {
+  "find" should "return None when list has less elements than the value of N" in {
     val list = List[Int](1, 2)
-    ListUtil.findNth(list, 3) shouldEqual None
+    ListUtil.find(list, 3) shouldEqual None
   }
 
-  "findNth" should "return None when provided with empty list" in {
-    ListUtil.findNth(List[Int](), 0) shouldEqual None
+  "find" should "return None when provided with empty list" in {
+    ListUtil.find(List[Int](), 0) shouldEqual None
   }
 
   "first" should "return first element of the list" in {
@@ -111,26 +111,40 @@ class ListUtilTest extends FlatSpec with Matchers {
     compressedList.length shouldBe 0
   }
 
-  "dropNth" should "remove the Nth element from the list" in {
+  "drop" should "remove the Nth element from the list" in {
     val list = List[Int](1, 2, 3, 4, 5)
-    val modifiedList = ListUtil.dropNth(list, 2)
+    val modifiedList = ListUtil.drop(list, 2)
     modifiedList shouldBe List[Int](1, 3, 4, 5)
   }
 
-  "dropNth" should "throw exception when n is greater than the number of elements in list" in {
+  "drop" should "throw exception when n is greater than the number of elements in list" in {
     val list = List[Int](1, 2, 3, 4, 5)
     val expectedException = intercept[RuntimeException] {
-      ListUtil.dropNth(list, 6)
+      ListUtil.drop(list, 6)
     }
     expectedException.getMessage shouldEqual "Invalid value of n"
   }
 
-  "dropNth" should "throw exception when n is lesser than 1" in {
+  "drop" should "throw exception when n is lesser than 1" in {
     val list = List[Int](1, 2, 3, 4, 5)
     val expectedException = intercept[RuntimeException] {
-      ListUtil.dropNth(list, 0)
+      ListUtil.drop(list, 0)
     }
     expectedException.getMessage shouldEqual "Invalid value of n"
+  }
+
+  "insert" should "add element into the list at appropriate position" in {
+    val list = List[Int](1, 2, 4, 5, 6)
+    val expectedList = List[Int](1, 2, 3, 4, 5, 6)
+    ListUtil.insert(list, 3, 3) shouldEqual expectedList
+  }
+
+  "insert" should "add element into empty list" in {
+    ListUtil.insert(List[Int](), 2, 1) shouldEqual List(2)
+  }
+
+  "insert" should "return empty list" in {
+    ListUtil.insert(List[Int](), 2, 3) shouldEqual List()
   }
 
   "split" should "split the list into two at the position mentioned by n" in {

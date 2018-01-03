@@ -1,29 +1,29 @@
 object ListUtil {
 
-  def first[A](list: List[A]): Option[A] = findNth(list, 1)
+  def first[A](list: List[A]): Option[A] = find(list, 1)
 
-  def last[A](list: List[A]): Option[A] = findNth(list, count(list))
+  def last[A](list: List[A]): Option[A] = find(list, count(list))
 
   def isEmpty[A](list: List[A]): Boolean = if (count(list) == 0) true else false
 
-  def lastNth[A](list: List[A], n: Int): List[A] = {
+  def last[A](list: List[A], n: Int): List[A] = {
     if (count(list) < n)
       throw new RuntimeException("Not enough item on the list")
     else if (isEmpty(list))
       List[A]()
     else if (count(list) == n)
-      List[A](list.head) ++ lastNth(list.tail, n - 1)
+      List[A](list.head) ++ last(list.tail, n - 1)
     else
-      lastNth(list.tail, n)
+      last(list.tail, n)
   }
 
-  def findNth[A](list: List[A], n: Int): Option[A] = {
+  def find[A](list: List[A], n: Int): Option[A] = {
     if (count(list) < n || n <= 0 || isEmpty(list))
       None
     else if (n == 1)
       Some(list.head)
     else
-      findNth(list.tail, n - 1)
+      find(list.tail, n - 1)
   }
 
   def count[A](list: List[A]): Int = {
@@ -55,7 +55,7 @@ object ListUtil {
       if (count(list) == n)
         true
       else
-        findNth(list, n) == findNth(list, count(list) - n + 1) &&
+        find(list, n) == find(list, count(list) - n + 1) &&
           palindrome(list, n + 1)
     }
     palindrome(list, 1)
@@ -73,12 +73,22 @@ object ListUtil {
     compressor(List(), list)
   }
 
-  def dropNth[A](list: List[A], n: Int): List[A] = {
+  def drop[A](list: List[A], n: Int): List[A] = {
     if (count(list) < n || n < 1) {
       throw new RuntimeException(s"Invalid value of n")
     } else {
       val (firstList, secondList) = split(list, n - 1)
       firstList ++ secondList.tail
+    }
+  }
+
+  def insert[A](list: List[A], item: A, pos: Int): List[A] = {
+    pos match {
+      case 1 => item :: list
+      case n if count(list) < n || n < 1 => Nil
+      case _ =>
+        val (firstList, secondList) = split(list, pos - 1)
+        (firstList :+ item) ++ secondList
     }
   }
 
