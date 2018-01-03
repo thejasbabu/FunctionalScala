@@ -1,22 +1,23 @@
 object ListUtil {
-  val first = (list: List[Any]) => findNth(list, 1)
 
-  val last = (list: List[Any]) => findNth(list, count(list))
+  def first[A](list: List[A]): Option[A] = findNth(list, 1)
 
-  val isEmpty = (list: List[Any]) => if( count(list) == 0 ) true else false
+  def last[A](list: List[A]): Option[A] = findNth(list, count(list))
 
-  def lastNth(list: List[Any], n: Int): List[Any] = {
+  def isEmpty[A](list: List[A]): Boolean = if (count(list) == 0) true else false
+
+  def lastNth[A](list: List[A], n: Int): List[A] = {
     if (count(list) < n)
       throw new RuntimeException("Not enough item on the list")
     else if (isEmpty(list))
-      List[Any]()
+      List[A]()
     else if (count(list) == n)
-      List[Any](list.head) ++ lastNth(list.tail, n - 1)
+      List[A](list.head) ++ lastNth(list.tail, n - 1)
     else
       lastNth(list.tail, n)
   }
 
-  def findNth(list: List[Any], n: Int): Option[Any] = {
+  def findNth[A](list: List[A], n: Int): Option[A] = {
     if (count(list) < n || n <= 0 || isEmpty(list))
       None
     else if (n == 1)
@@ -25,8 +26,8 @@ object ListUtil {
       findNth(list.tail, n - 1)
   }
 
-  def count(list: List[Any]): Int = {
-    def counter(list: List[Any], i: Int): Int = {
+  def count[A](list: List[A]): Int = {
+    def counter(list: List[A], i: Int): Int = {
       list match {
         case Nil => i
         case _ :: tail => counter(tail, i + 1)
@@ -35,8 +36,8 @@ object ListUtil {
     counter(list, 0)
   }
 
-  def reverse(list: List[Any]): List[Any] = {
-    def reverseList(original: List[Any], reversed: List[Any]): List[Any] =
+  def reverse[A](list: List[A]): List[A] = {
+    def reverseList(original: List[A], reversed: List[A]): List[A] =
       original match {
         case Nil => reversed
         case x :: Nil => x :: reversed
@@ -49,8 +50,8 @@ object ListUtil {
       Or simply list == reverse(list) would also work for isPalindrome
   */
 
-  def isPalindrome(list: List[Any]): Boolean = {
-    def palindrome(list: List[Any], n: Int): Boolean = {
+  def isPalindrome[A](list: List[A]): Boolean = {
+    def palindrome(list: List[A], n: Int): Boolean = {
       if (count(list) == n)
         true
       else
@@ -60,8 +61,8 @@ object ListUtil {
     palindrome(list, 1)
   }
 
-  def compress(list: List[Any]): List[Any] = {
-    def compressor(compressed: List[Any], original: List[Any]): List[Any] = {
+  def compress[A](list: List[A]): List[A] = {
+    def compressor(compressed: List[A], original: List[A]): List[A] = {
       if (isEmpty(original))
         compressed
       else if (last(compressed) == first(original))
@@ -72,7 +73,7 @@ object ListUtil {
     compressor(List(), list)
   }
 
-  def dropNth(list: List[Any], n: Int): List[Any] = {
+  def dropNth[A](list: List[A], n: Int): List[A] = {
     if (count(list) < n || n < 1) {
       throw new RuntimeException(s"Invalid value of n")
     } else {
@@ -81,8 +82,8 @@ object ListUtil {
     }
   }
 
-  def split(list: List[Any], n: Int): (List[Any], List[Any]) = {
-    def splitAtNth(list: List[Any], leftList: List[Any]): (List[Any], List[Any]) = {
+  def split[A](list: List[A], n: Int): (List[A], List[A]) = {
+    def splitAtNth(list: List[A], leftList: List[A]): (List[A], List[A]) = {
       if (count(list) == n || n < 1) {
         (list, leftList)
       } else {
@@ -96,7 +97,7 @@ object ListUtil {
     }
   }
 
-  def slice(list: List[Any], i: Int, j: Int): List[Any] = {
+  def slice[A](list: List[A], i: Int, j: Int): List[A] = {
     if (count(list) < j || i < 1) {
       throw new RuntimeException(s"Invalid value of n")
     } else {
