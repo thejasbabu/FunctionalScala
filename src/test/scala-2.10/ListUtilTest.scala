@@ -65,7 +65,7 @@ class ListUtilTest extends FlatSpec with Matchers {
 
   "isEmpty" should "returns true if empty or false if not empty" in {
     ListUtil.isEmpty(List()) shouldEqual true
-    ListUtil.isEmpty(List(1,2,3)) shouldEqual false
+    ListUtil.isEmpty(List(1, 2, 3)) shouldEqual false
   }
 
   "count" should "return number of items in list" in {
@@ -131,6 +131,16 @@ class ListUtilTest extends FlatSpec with Matchers {
       ListUtil.drop(list, 0)
     }
     expectedException.getMessage shouldEqual "Invalid value of n"
+  }
+
+  "repeatDrop" should "return original list if repeat interval is greater than list" in {
+    val list = List[Int](1, 2)
+    ListUtil.repeatDrop(list, 4) shouldEqual list
+  }
+
+  "repeatDrop" should "return list with element dropped at nth interval" in {
+    val list = List[Int](1, 2, 3, 4, 5, 6, 7)
+    ListUtil.repeatDrop(list, 3) shouldEqual List(1, 2, 4, 5, 7)
   }
 
   "insert" should "add element into the list at appropriate position" in {

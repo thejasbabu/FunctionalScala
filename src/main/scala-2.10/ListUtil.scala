@@ -82,6 +82,16 @@ object ListUtil {
     }
   }
 
+  def repeatDrop[A](list: List[A], n: Int): List[A] = {
+    def repeatDropItem(list: List[A], pos: Int): List[A] = {
+      pos match {
+        case i if i > count(list) => list
+        case _ => repeatDropItem(drop(list, pos), pos + n - 1)
+      }
+    }
+    repeatDropItem(list, n)
+  }
+
   def insert[A](list: List[A], item: A, pos: Int): List[A] = {
     pos match {
       case 1 => item :: list
