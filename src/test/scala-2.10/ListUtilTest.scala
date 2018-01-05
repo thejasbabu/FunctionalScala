@@ -163,4 +163,12 @@ class ListUtilTest extends FlatSpec with Matchers {
     val result = ListUtil.slice(list, 1, 5)
     result shouldEqual List[Any](1, 2, 3, 4, 5)
   }
+
+  "range" should "return list of integers within the range" in {
+    ListUtil.range(5, 8) shouldEqual List[Any](5, 6, 7, 8)
+  }
+
+  "range" should "return empty List if start > end" in {
+    ListUtil.range(7, 1) shouldEqual List()
+  }
 }

@@ -77,8 +77,8 @@ object ListUtil {
     n match {
       case pos if count(list) < pos => list
       case pos if pos < 1 => list
-      case pos =>
-        val (first, second) = split(list, pos - 1)
+      case _ =>
+        val (first, second) = split(list, n - 1)
         first ++ second.tail
     }
   }
@@ -126,5 +126,15 @@ object ListUtil {
       val (_, resultList) = split(firstList, i - 1)
       resultList
     }
+  }
+
+  def range(start: Int, end: Int): List[Int] = {
+    def createRange(list: List[Int], pos: Int): List[Int] = {
+      pos match {
+        case n if n <= end => createRange(list :+ n, n + 1)
+        case _ => list
+      }
+    }
+    createRange(Nil, start)
   }
 }
