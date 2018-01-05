@@ -74,11 +74,12 @@ object ListUtil {
   }
 
   def drop[A](list: List[A], n: Int): List[A] = {
-    if (count(list) < n || n < 1) {
-      throw new RuntimeException(s"Invalid value of n")
-    } else {
-      val (firstList, secondList) = split(list, n - 1)
-      firstList ++ secondList.tail
+    n match {
+      case pos if count(list) < pos => list
+      case pos if pos < 1 => list
+      case pos =>
+        val (first, second) = split(list, pos - 1)
+        first ++ second.tail
     }
   }
 

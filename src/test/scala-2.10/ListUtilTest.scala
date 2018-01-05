@@ -112,25 +112,19 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "drop" should "remove the Nth element from the list" in {
-    val list = List[Int](1, 2, 3, 4, 5)
-    val modifiedList = ListUtil.drop(list, 2)
-    modifiedList shouldBe List[Int](1, 3, 4, 5)
+    val list = List[Int](10, 20, 30, 40, 50)
+    val modifiedList = ListUtil.drop(list, 5)
+    modifiedList shouldBe List[Int](10, 20, 30, 40)
   }
 
-  "drop" should "throw exception when n is greater than the number of elements in list" in {
+  "drop" should "return input list when n is greater than the number of elements in list" in {
     val list = List[Int](1, 2, 3, 4, 5)
-    val expectedException = intercept[RuntimeException] {
-      ListUtil.drop(list, 6)
-    }
-    expectedException.getMessage shouldEqual "Invalid value of n"
+    ListUtil.drop(list, 6) shouldEqual list
   }
 
-  "drop" should "throw exception when n is lesser than 1" in {
+  "drop" should "return input list when n is negative or zero" in {
     val list = List[Int](1, 2, 3, 4, 5)
-    val expectedException = intercept[RuntimeException] {
-      ListUtil.drop(list, 0)
-    }
-    expectedException.getMessage shouldEqual "Invalid value of n"
+    ListUtil.drop(list, 0) shouldEqual list
   }
 
   "repeatDrop" should "return original list if repeat interval is greater than list" in {
