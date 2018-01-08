@@ -107,14 +107,12 @@ class ListUtilTest extends FlatSpec with Matchers {
   }
 
   "compress" should "return empty list" in {
-    val compressedList = ListUtil.compress(List[Int]())
-    compressedList.length shouldBe 0
+    ListUtil.compress(List[Int]()) shouldEqual List()
   }
 
   "drop" should "remove the Nth element from the list" in {
     val list = List[Int](10, 20, 30, 40, 50)
-    val modifiedList = ListUtil.drop(list, 5)
-    modifiedList shouldBe List[Int](10, 20, 30, 40)
+    ListUtil.drop(list, 5) shouldEqual List[Int](10, 20, 30, 40)
   }
 
   "drop" should "return input list when n is greater than the number of elements in list" in {
@@ -160,8 +158,12 @@ class ListUtilTest extends FlatSpec with Matchers {
 
   "slice" should "slice the list between the two given position" in {
     val list = List[Int](1, 2, 3, 4, 5, 6)
-    val result = ListUtil.slice(list, 1, 5)
-    result shouldEqual List[Any](1, 2, 3, 4, 5)
+    ListUtil.slice(list, 1, 5) shouldEqual List[Any](1, 2, 3, 4, 5)
+  }
+
+  "slice" should "returns empty list if start and end positions are not correct" in {
+    val list = List[Int](1, 2, 3, 4, 5, 6)
+    ListUtil.slice(list, 5, 8) shouldEqual List()
   }
 
   "range" should "return list of integers within the range" in {

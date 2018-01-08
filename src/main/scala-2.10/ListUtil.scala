@@ -120,7 +120,7 @@ object ListUtil {
 
   def slice[A](list: List[A], i: Int, j: Int): List[A] = {
     if (count(list) < j || i < 1) {
-      throw new RuntimeException(s"Invalid value of n")
+      Nil
     } else {
       val (firstList, _) = split(list, j)
       val (_, resultList) = split(firstList, i - 1)
