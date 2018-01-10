@@ -173,4 +173,9 @@ class ListUtilTest extends FlatSpec with Matchers {
   "range" should "return empty List if start > end" in {
     ListUtil.range(7, 1) shouldEqual List()
   }
+
+  "flatten" should "returns flatten list" in {
+    ListUtil.flatten(List(1, 2, List(4, List(5)), 6, 7)) shouldEqual List(1, 2, 4, 5, 6, 7)
+    ListUtil.flatten(List(1, 2, 3, 4, List(6, 7))) shouldEqual List(1, 2, 3, 4, 6, 7)
+  }
 }

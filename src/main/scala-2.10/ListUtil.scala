@@ -137,4 +137,18 @@ object ListUtil {
     }
     createRange(Nil, start)
   }
+
+  def flatten[A](list: List[A]): List[A] = {
+    def flat(flatList: List[A], list: List[A]): List[A] = {
+      list match {
+        case Nil => flatList
+        case head :: tail =>
+          head match {
+            case x: List[A] => flat(flat(flatList, x), tail)
+            case x => flat(flatList :+ x, tail)
+          }
+      }
+    }
+    flat(Nil, list)
+  }
 }
