@@ -10,4 +10,10 @@ object SetUtils {
     }
     find(xs)
   }
+
+  def union[A](s1: Set[A], s2: Set[A]): Set[A] = {
+    if (empty(s1)) s2
+    else if (contains(s2, s1.head)) union(s1.tail, s2)
+    else union(s1.tail, s2 + s1.head)
+  }
 }
