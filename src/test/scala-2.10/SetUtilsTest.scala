@@ -17,4 +17,10 @@ class SetUtilsTest extends FlatSpec with Matchers {
     SetUtils.union(Set(), Set(1, 2, 4)) shouldEqual Set(1, 2, 4)
     SetUtils.union(Set(1, 2, 4), Set()) shouldEqual Set(1, 2, 4)
   }
+
+  "intersect" should "return intersection of two sets" in {
+    SetUtils.intersect(Set(1, 2, 3), Set(1, 2, 4)) shouldEqual Set(1, 2)
+    SetUtils.intersect(Set(), Set(1, 2, 4)) shouldEqual Set()
+    SetUtils.intersect(Set(1, 2, 4), Set(5, 3)) shouldEqual Set()
+  }
 }

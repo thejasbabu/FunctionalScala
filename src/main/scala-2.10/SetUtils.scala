@@ -16,4 +16,13 @@ object SetUtils {
     else if (contains(s2, s1.head)) union(s1.tail, s2)
     else union(s1.tail, s2 + s1.head)
   }
+
+  def intersect[A](s1: Set[A], s2: Set[A]): Set[A] = {
+    def intersectSet(a: Set[A], b: Set[A], res: Set[A]): Set[A] = {
+      if (empty(a) || empty(b)) res
+      else if (contains(a, b.head)) intersectSet(a, b.tail, res + b.head)
+      else intersectSet(a, b.tail, res)
+    }
+    intersectSet(s1, s2, Set())
+  }
 }
