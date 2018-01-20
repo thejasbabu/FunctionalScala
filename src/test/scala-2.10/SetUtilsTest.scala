@@ -23,4 +23,11 @@ class SetUtilsTest extends FlatSpec with Matchers {
     SetUtils.intersect(Set(), Set(1, 2, 4)) shouldEqual Set()
     SetUtils.intersect(Set(1, 2, 4), Set(5, 3)) shouldEqual Set()
   }
+
+  "isSubset" should "check if set is a subset of the superset" in {
+    SetUtils.isSubset(Set(1, 2, 3), Set(1, 2)) shouldEqual true
+    SetUtils.isSubset(Set(1, 2, 3), Set()) shouldEqual true
+    SetUtils.isSubset(Set(1, 2, 3), Set(4)) shouldEqual false
+    SetUtils.isSubset(Set(1, 2, 3), Set(4, 2, 1)) shouldEqual false
+  }
 }

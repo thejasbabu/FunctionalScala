@@ -25,4 +25,8 @@ object SetUtils {
     }
     intersectSet(s1, s2, Set())
   }
+
+  def isSubset[A](superset: Set[A], set: Set[A]): Boolean = {
+    empty(set.map(elem => contains(superset, elem)).filter(x => !x))
+  }
 }
