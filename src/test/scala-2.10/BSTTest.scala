@@ -21,6 +21,13 @@ class BSTTest extends FlatSpec with Matchers {
     BST.add[Int](1, tree) shouldEqual Node[Int](4, Node(2, leaf(1), EmptyNode[Int]()), leaf(5))
   }
 
+  "BST" should "search for a node in tree" in {
+    val subTree = Node(2, leaf(1), EmptyNode[Int]())
+    val tree = Node[Int](4, subTree, leaf(5))
+    BST.search[Int](2, tree) shouldEqual Some(subTree)
+    BST.search[Int](7, tree) shouldEqual None
+  }
+
   def leaf[A](value: A):Node[A] = {
     Node(value, EmptyNode[A](), EmptyNode[A]())
   }

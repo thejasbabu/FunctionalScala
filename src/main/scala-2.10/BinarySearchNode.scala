@@ -28,4 +28,13 @@ object BST {
       case Node(x, l, r) if numeric.lteq(value, x) => Node(x, add(value, l), r)
     }
   }
+
+  def search[A](value: A, node: Tree[A])(implicit numeric: Numeric[A]): Option[Tree[A]] = {
+    node match {
+      case EmptyNode() => None
+      case Node(x, _, _) if numeric.equiv(value, x) => Some(node)
+      case Node(x, _, r) if numeric.gt(value, x) => search(value, r)
+      case Node(x, l, _) if numeric.lt(value, x) => search(value, l)
+    }
+  }
 }
