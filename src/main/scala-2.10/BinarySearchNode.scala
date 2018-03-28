@@ -1,5 +1,7 @@
 sealed trait Tree[A]
+
 case class Node[A](value: A, left: Tree[A], right: Tree[A]) extends Tree[A]
+
 case class EmptyNode[A]() extends Tree[A]
 
 object BST {
@@ -35,6 +37,17 @@ object BST {
       case Node(x, _, _) if numeric.equiv(value, x) => Some(node)
       case Node(x, _, r) if numeric.gt(value, x) => search(value, r)
       case Node(x, l, _) if numeric.lt(value, x) => search(value, l)
+    }
+  }
+
+  def delete[A](value: A, node: Tree[A])(implicit numeric: Numeric[A]): Tree[A] = {
+    node match {
+      case EmptyNode() => EmptyNode[A]()
+      case Node(x, EmptyNode(), EmptyNode()) if numeric.equiv(value, x) => EmptyNode[A]()
+      case Node(x, l: Node[A], r: Node[A]) if numeric.equiv(l.value, value) => Node(x, l.right, r)
+      case Node(x, l: Node[A], r: Node[A]) if numeric.equiv(r.value, value) => Node(x, l, r.left)
+      case Node(x, l, r) if numeric.gteq(value, x) => Node(x, l, delete(value, r))
+      case Node(x, l, r) if numeric.lteq(value, x) => Node(x, delete(value, l), r)
     }
   }
 }
